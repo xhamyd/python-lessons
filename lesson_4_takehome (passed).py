@@ -16,6 +16,7 @@ Topics covered: functions, lists, for/while loops, arithmetic operations, variab
 # --- DO NOT EDIT ABOVE THIS LINE --- #
 # Program to display the Fibonacci sequence up to n-th term
 
+
 def nth_fibonacci(nth_term):
     n1, n2 = 0, 1
     count = 0

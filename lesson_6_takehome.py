@@ -35,12 +35,20 @@ refers to the patch number, usually for adding some small features/items within 
 As a QA Tester, you have gotten 10-year-old customers complaining that the Slurp Juice failed to give that epic gamer
 point like it used to a year ago (~ver 8.00). From your testing, you have a running list whether the slurp juice worked
 or not for each version since Season 8 started. Given this list, determine the first software version that broke this
+function. You are provided the `is_slurp_juice_broken`, which takes in a version string from this list (i.e. "8.60") and
+tells you whether this version is broken or not.
+
+4) Given a list of tuples, sort the list using the second element of the tuple in ascending order.
+
+    second_element_sort([(4, 2), (3, 1)]) == [(3, 1), (4, 2)]
+    second_element_sort([(6, 9, 4), (9, 6, 4, 2), (13, 12)]) == [(9, 6, 4, 2), (6, 9, 4), (13, 12)]
+    second_element_sort([(5, 3, 2, 7, 6, 4, 8), (2, 1), (-1, -2, -3)]) == [(-1, -2, -3), (2, 1), (5, 3, 2, 7, 6, 4, 8)]
+
+5) Using recursion, find the maximum element in a list. Do not use for-loops, while-loops, or the built-in max()
 function.
 
-You are provided the `is_slurp_juice_broken`, which takes in a version string from this list (i.e. "8.60") and tells you
-whether this version is broken or not.
 
-Topics covered: files, lists, search
+Topics covered: files, lists, search, lambda
 
 """
 
@@ -67,6 +75,10 @@ def is_magic_square(square_array):
 
 
 def when_did_slurp_break(version_list):
+    pass  # TODO: delete this entire line and complete this function
+
+
+def second_element_sort(tuple_list):
     pass  # TODO: delete this entire line and complete this function
 
 
@@ -134,12 +146,24 @@ def test_3(function_under_test, val_num):
     return True if actual_val == out_val else "[FORTNITE_VERSIONS]", out_val, actual_val
 
 
+def test_4(function_under_test, val_num):
+    in_vals = ([(4, 2), (3, 1)], [(6, 9, 4), (9, 6, 4, 2), (13, 12)], [(5, 3, 2, 7, 6, 4, 8), (2, 1), (-1, -2, -3)])
+    out_vals = ([(3, 1), (4, 2)], [(9, 6, 4, 2), (6, 9, 4), (13, 12)], [(-1, -2, -3), (2, 1), (5, 3, 2, 7, 6, 4, 8)])
+
+    assert val_num in range(3), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
+    in_val, out_val = in_vals[val_num], out_vals[val_num]
+    actual_val = function_under_test(in_val)
+    return True if actual_val == out_val else in_val, out_val, actual_val
+
+
 tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", function_under_test=is_closed,
                 testing_function=test_1, number_of_test_cases=2),
        TestCase(problem_number=2, description="Determine a magic square or not.", function_under_test=is_magic_square,
                 testing_function=test_2, number_of_test_cases=4),
        TestCase(problem_number=3, description="Find first version with broken slurp juice.",
-                function_under_test=when_did_slurp_break, testing_function=test_3, number_of_test_cases=1)]
+                function_under_test=when_did_slurp_break, testing_function=test_3, number_of_test_cases=1),
+       TestCase(problem_number=4, description="Sort list of tuples by second element.",
+                function_under_test=second_element_sort, testing_function=test_4, number_of_test_cases=3)]
 
 for tc in tcs:
     print(f"Problem {tc.num}: {tc!s}")

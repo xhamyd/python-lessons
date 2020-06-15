@@ -7,7 +7,28 @@ Lesson 6
     Return True for a closed file (is_closed(<file_closed 0x???>) == True).
     Return False for an open file (is_closed(<file_open 0x???>) == False).
 
-Topics covered:
+2) A magic square (https://en.wikipedia.org/wiki/Magic_square) is a NxN square of unique integers from 1 to N^2, where
+each horizontal, vertical, and diagonal row add up to the same number. Given a 2D array representation of a square,
+determine if it is a magic square or not.
+
+    [[ 2 2 ]           is not a magic square (is_magic_square(<...>) == False).
+     [ 2 2 ]]
+
+    [[  5 15 16  2 ]
+     [ 10  8  7 13 ]   is a magic square (is_magic_square(<...>) == True).
+     [  6 12 11  9 ]
+     [ 17  3  4 14 ]]
+
+    [[  4  7  1 10 ]
+     [  3  8  2  9 ]   is not a magic square (is_magic_square(<...>) == False).
+     [  9  3  8  2 ]
+     [  6  4 11  1 ]]
+
+    [[ 2 7 6 ]
+     [ 9 5 1 ]         is a magic square (is_magic_square(<...>) == True).
+     [ 4 3 8 ]]
+
+Topics covered: files, lists
 
 """
 
@@ -20,23 +41,12 @@ def is_closed(file_pointer):
     pass  # TODO: delete this entire line and complete this function
 
 
-def list_overlap(first_list, second_list):
-    pass  # TODO: delete this entire line and complete this function
-
-
-def factors(dividend):
-    pass  # TODO: delete this entire line and complete this function
-
-
-def is_prime(number):
-    pass  # TODO: delete this entire line and complete this function
-
-
-def text_at_line(line_number, filename="lesson_5_problem_5.txt"):
+def is_magic_square(square_array):
     pass  # TODO: delete this entire line and complete this function
 
 
 # --- DO NOT EDIT BELOW THIS LINE --- #
+
 class TestCase:
     def __init__(self, problem_number, description, function_under_test, testing_function, number_of_test_cases):
         self.num = problem_number
@@ -50,7 +60,7 @@ class TestCase:
 
     def run(self):
         res, outcome = True, []
-        for case_num in range(1, self.cases+1):
+        for case_num in range(self.cases):
             if (vals := self.test(self.func, case_num)) is not True:
                 res = False
                 in_val, out_val, actual_val = vals
@@ -61,15 +71,15 @@ class TestCase:
 
 # Test Cases
 def test_1(function_under_test, val_num):
-    assert val_num in (1, 2), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
-    if val_num == 1:
-        in_val, out_val = open("tempfile1.txt", "w"), True
+    assert val_num in range(2), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
+    if val_num == 0:
+        in_val, out_val = open("tempfile0.txt", "w"), True
         in_val.close()
         actual_val = function_under_test(in_val)
         os.remove(in_val.name)
         return True if actual_val == out_val else in_val, out_val, actual_val
     else:
-        in_val, out_val = open("tempfile2.txt", "w"), False
+        in_val, out_val = open("tempfile1.txt", "w"), False
         actual_val = function_under_test(in_val)
         if not in_val.closed:
             in_val.close()
@@ -78,8 +88,23 @@ def test_1(function_under_test, val_num):
         return True if actual_val == out_val else in_val, out_val, actual_val
 
 
+def test_2(function_under_test, val_num):
+    in_vals = ([[2, 2], [2, 2]],
+               [[5, 15, 16, 2], [10, 8, 7, 13], [6, 12, 11, 9], [17, 3, 4, 14]],
+               [[4, 7, 1, 10], [3, 8, 2, 9], [9, 3, 8, 2], [6, 4, 11, 1]],
+               [[2, 7, 6], [9, 5, 1], [4, 3, 8]])
+    out_vals = (False, True, False, True)
+    assert val_num in range(4), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
+
+    in_val, out_val = in_vals[val_num], out_vals[val_num]
+    actual_val = function_under_test(in_val)
+    return True if actual_val == out_val else in_val, out_val, actual_val
+
+
 tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", function_under_test=is_closed,
-                testing_function=test_1, number_of_test_cases=2)]
+                testing_function=test_1, number_of_test_cases=2),
+       TestCase(problem_number=2, description="Determine a magic square or not.", function_under_test=is_magic_square,
+                testing_function=test_2, number_of_test_cases=4)]
 
 for tc in tcs:
     print(f"Problem {tc.num}: {tc!s}")

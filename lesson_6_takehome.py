@@ -48,7 +48,7 @@ tells you whether this version is broken or not.
 function.
 
 
-Topics covered: files, lists, search, lambda
+Topics covered: files, lists, search, lambda, recursion
 
 """
 
@@ -79,6 +79,10 @@ def when_did_slurp_break(version_list):
 
 
 def second_element_sort(tuple_list):
+    pass  # TODO: delete this entire line and complete this function
+
+
+def maximum_value(value_list):
     pass  # TODO: delete this entire line and complete this function
 
 
@@ -156,6 +160,13 @@ def test_4(function_under_test, val_num):
     return True if actual_val == out_val else in_val, out_val, actual_val
 
 
+def test_5(function_under_test, val_num):
+    assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
+    in_val = random.choices(range(10), k=random.randint(1, 10))
+    out_val, actual_val = max(in_val), function_under_test(in_val)
+    return True if actual_val == out_val else in_val, out_val, actual_val
+
+
 tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", function_under_test=is_closed,
                 testing_function=test_1, number_of_test_cases=2),
        TestCase(problem_number=2, description="Determine a magic square or not.", function_under_test=is_magic_square,
@@ -163,7 +174,9 @@ tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", 
        TestCase(problem_number=3, description="Find first version with broken slurp juice.",
                 function_under_test=when_did_slurp_break, testing_function=test_3, number_of_test_cases=1),
        TestCase(problem_number=4, description="Sort list of tuples by second element.",
-                function_under_test=second_element_sort, testing_function=test_4, number_of_test_cases=3)]
+                function_under_test=second_element_sort, testing_function=test_4, number_of_test_cases=3),
+       TestCase(problem_number=5, description="Find maximum element using recursion.",
+                function_under_test=maximum_value, testing_function=test_5, number_of_test_cases=1)]
 
 for tc in tcs:
     print(f"Problem {tc.num}: {tc!s}")

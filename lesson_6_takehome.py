@@ -28,11 +28,32 @@ determine if it is a magic square or not.
      [ 9 5 1 ]         is a magic square (is_magic_square(<...>) == True).
      [ 4 3 8 ]]
 
-Topics covered: files, lists
+3) Epic Games rolls out new versions of their insanely cool Fortnite program around every month, using X.YY versioning
+scheme (https://semver.org/). Basically, the X number refers to the Season number (i.e. Season 10), and the YY number
+refers to the patch number, usually for adding some small features/items within the same season.
+
+As a QA Tester, you have gotten 10-year-old customers complaining that the Slurp Juice failed to give that epic gamer
+point like it used to a year ago (~ver 8.00). From your testing, you have a running list whether the slurp juice worked
+or not for each version since Season 8 started. Given this list, determine the first software version that broke this
+function.
+
+You are provided the `is_slurp_juice_broken`, which takes in a version string from this list (i.e. "8.60") and tells you
+whether this version is broken or not.
+
+Topics covered: files, lists, search
 
 """
 
 import os
+import random
+
+FIRST_BAD_VERSION = random.randrange(26)
+FORTNITE_VERSIONS = ["8.00", "8.01", "8.10", "8.11", "8.20", "8.30", "8.40", "8.50", "9.00", "9.01", "9.20", "9.21",
+                     "9.30", "9.40", "9.41", "10.10", "10.20", "10.30", "10.31", "10.4", "11.10", "11.20", "11.30",
+                     "11.31", "11.40", "11.50"]
+
+
+def is_slurp_juice_broken(version_string): return float(version_string) >= float(FORTNITE_VERSIONS[FIRST_BAD_VERSION])
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
 
@@ -45,7 +66,12 @@ def is_magic_square(square_array):
     pass  # TODO: delete this entire line and complete this function
 
 
+def when_did_slurp_break(version_list):
+    pass  # TODO: delete this entire line and complete this function
+
+
 # --- DO NOT EDIT BELOW THIS LINE --- #
+
 
 class TestCase:
     def __init__(self, problem_number, description, function_under_test, testing_function, number_of_test_cases):
@@ -101,10 +127,19 @@ def test_2(function_under_test, val_num):
     return True if actual_val == out_val else in_val, out_val, actual_val
 
 
+def test_3(function_under_test, val_num):
+    assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
+    in_val, out_val = FORTNITE_VERSIONS, FORTNITE_VERSIONS[FIRST_BAD_VERSION]
+    actual_val = function_under_test(in_val)
+    return True if actual_val == out_val else "[FORTNITE_VERSIONS]", out_val, actual_val
+
+
 tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", function_under_test=is_closed,
                 testing_function=test_1, number_of_test_cases=2),
        TestCase(problem_number=2, description="Determine a magic square or not.", function_under_test=is_magic_square,
-                testing_function=test_2, number_of_test_cases=4)]
+                testing_function=test_2, number_of_test_cases=4),
+       TestCase(problem_number=3, description="Find first version with broken slurp juice.",
+                function_under_test=when_did_slurp_break, testing_function=test_3, number_of_test_cases=1)]
 
 for tc in tcs:
     print(f"Problem {tc.num}: {tc!s}")

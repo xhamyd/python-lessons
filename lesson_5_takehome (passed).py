@@ -48,8 +48,13 @@ import re
 
 def is_palindrome(x):
     reverse = x[len(x)::-1]
+    #x[start:stop:step]
     check = re.match(x, reverse)
+    #while x
+        #print(x==reverse)
+    print(type(check))
     return bool(check)
+    #bool checks if this object is an object
 
 
 def list_overlap(first_list, second_list):
@@ -75,9 +80,10 @@ def is_prime(number):
 
 
 def text_at_line(line_number, filename="lesson_5_problem_5.txt"):
-    file = open(filename)
-    all_lines = file.readlines()
-    line = str(all_lines[line_number - 1])
+    with open(filename) as f:
+        file = open(filename, 'r')
+        all_lines = file.readlines()
+        line = str(all_lines[line_number - 1])
 
     return line.rstrip("\n")
             

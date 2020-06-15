@@ -33,35 +33,39 @@ def text_at_line(line_number, filename="lesson_5_problem_5.txt"):
 
 # --- DO NOT EDIT BELOW THIS LINE --- #
 class TestCase:
-    def __init__(self, problem_number, description, function_under_test, testing_function):
+    def __init__(self, problem_number, description, function_under_test, testing_function, number_of_test_cases):
         self.num = problem_number
         self.desc = description
         self.func = function_under_test
         self.test = testing_function
+        self.cases = number_of_test_cases
 
     def __str__(self):
         return self.desc
 
     def run(self):
-        return self.test(self.func)
-
-
-def test_1(function_under_test):
-    res, outcome = True, []
-    in_vals = [1, 2, 3]
-    out_vals = [1, 4, 9]
-    for in_val, out_val in zip(in_vals, out_vals):
-        actual_val = function_under_test(in_val)
-        if actual_val != out_val:
-            res = False
-            outcome.append(f"    Your solution:     {function_under_test.__name__}({in_val}) -> {actual_val}\n"
-                           f"    Expected solution: {function_under_test.__name__}({in_val}) -> {out_val}\n")
-    return res, outcome
+        res, outcome = True, []
+        for case_num in range(self.cases):
+            if (vals := self.test(self.func, case_num)) is not True:
+                res = False
+                in_val, out_val, actual_val = vals
+                outcome.append(f"    Your solution:     {self.func.__name__}({in_val}) -> {actual_val}\n"
+                               f"    Expected solution: {self.func.__name__}({in_val}) -> {out_val}\n")
+        return res, outcome
 
 
 # Test Cases
+def test_1(function_under_test, val_num):
+    in_vals = [1, 2, 3]
+    out_vals = [1, 4, 9]
+
+    in_val, out_val = in_vals[val_num], out_vals[val_num]
+    actual_val = function_under_test(in_val)
+    return True if out_val == actual_val else in_val, out_val, actual_val
+
+
 tcs = [TestCase(problem_number=1, description="Determine if a string is a palindrome.",
-                function_under_test=is_palindrome, testing_function=test_1)]
+                function_under_test=is_palindrome, testing_function=test_1, number_of_test_cases=3)]
 
 for tc in tcs:
     print(f"Problem {tc.num}: {tc!s}")

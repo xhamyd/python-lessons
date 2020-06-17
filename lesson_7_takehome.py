@@ -12,20 +12,10 @@ Lesson 7
 
 5) RegEx over text files
 
-Topics covered: Dictionaries, sets, recursion, OOP
+Topics covered: Dictionaries, JSON, sets, recursion, OOP, graphics, algorithms, file handling, text parsing
 
 """
 
-import os
-import random
-
-FIRST_BAD_VERSION = random.randrange(26)
-FORTNITE_VERSIONS = ["8.00", "8.01", "8.10", "8.11", "8.20", "8.30", "8.40", "8.50", "9.00", "9.01", "9.20", "9.21",
-                     "9.30", "9.40", "9.41", "10.10", "10.20", "10.30", "10.31", "10.4", "11.10", "11.20", "11.30",
-                     "11.31", "11.40", "11.50"]
-
-
-def is_slurp_juice_broken(version_string): return float(version_string) >= float(FORTNITE_VERSIONS[FIRST_BAD_VERSION])
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
 

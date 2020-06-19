@@ -2,7 +2,10 @@
 Lesson 7
 --------
 
-1) Birthdays in JSON
+1) In 'lesson_7_problem_1.json' file, you will find several holidays of varying statuses (i.e. Federal, Proposed,
+Celebrated). We will be using this JSON file in future assignments, but for this problem:
+  - Read the JSON into Python, using any Python object you prefer
+  - Return the number of holidays provided that are in the month of June (month == 6)
 
 2) Power sets
 
@@ -16,11 +19,12 @@ Topics covered: Dictionaries, JSON, sets, recursion, OOP, graphics, algorithms, 
 
 """
 
+JSON_FILE = "lesson_7_problem_1.json"
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
 
 
-def is_closed(file_pointer):
+def june_holidays(birthday_json_file):
     pass  # TODO: delete this entire line and complete this function
 
 
@@ -67,21 +71,10 @@ class TestCase:
 
 # Test Cases
 def test_1(function_under_test, val_num):
-    assert val_num in range(2), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
-    if val_num == 0:
-        in_val, out_val = open("tempfile0.txt", "w"), True
-        in_val.close()
-        actual_val = function_under_test(in_val)
-        os.remove(in_val.name)
-        return True if actual_val == out_val else in_val, out_val, actual_val
-    else:
-        in_val, out_val = open("tempfile1.txt", "w"), False
-        actual_val = function_under_test(in_val)
-        if not in_val.closed:
-            in_val.close()
-            os.remove(in_val.name)
-            return in_val, out_val, actual_val
-        return True if actual_val == out_val else in_val, out_val, actual_val
+    assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
+    in_val, out_val = JSON_FILE, 2
+    actual_val = function_under_test(in_val)
+    return True if actual_val == out_val else in_val, out_val, actual_val
 
 
 def test_2(function_under_test, val_num):
@@ -121,8 +114,8 @@ def test_5(function_under_test, val_num):
     return True if actual_val == out_val else in_val, out_val, actual_val
 
 
-tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", function_under_test=is_closed,
-                testing_function=test_1, number_of_test_cases=2),
+tcs = [TestCase(problem_number=1, description="Read JSON file to count number of holidays in June.",
+                function_under_test=june_holidays, testing_function=test_1, number_of_test_cases=1),
        TestCase(problem_number=2, description="Determine a magic square or not.", function_under_test=is_magic_square,
                 testing_function=test_2, number_of_test_cases=4),
        TestCase(problem_number=3, description="Find first version with broken slurp juice.",

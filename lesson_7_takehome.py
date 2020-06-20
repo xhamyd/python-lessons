@@ -31,7 +31,7 @@ Topics covered: Dictionaries, JSON, sets, recursion, OOP, file handling
 
 """
 
-import io
+import os
 
 JSON_FILE = "lesson_7_problem_1.json"
 
@@ -107,7 +107,10 @@ def test_3(function_under_test, val_num):
         return "FileReader.read()", "Foo © bar", binary_output
     if not hasattr(jread, "json_dict"):
         return in_val, "JSONReader.json_dict exists", "JSONReader.json_dict does not exists"
-    json_output = jread.read()
+    json_res = jread.read()
+    if json_res is not True:
+        return "JSONReader.read()", "True", json_res
+    json_output = jread.json_dict
     json_dict = {
         "main": {
             "fibonacci": [1, 2, 3, 5, 8],
@@ -117,7 +120,12 @@ def test_3(function_under_test, val_num):
             }
         }
     }
-    return True if json_output == json_dict else "JSONReader.read()", json_dict, json_output
+    if json_output != json_dict:
+        return "JSONReader.read()", json_dict, json_output
+    os.remove("lesson_7_problem_1.json")
+    json_res = jread.read()
+    if json_res is not False:
+        return "JSONReader.read()", "False", json_res
 
 
 tcs = [TestCase(problem_number=1, description="Read JSON file to count number of holidays in June.",

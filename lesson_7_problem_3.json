@@ -1,0 +1,9 @@
+{
+  "main": {
+    "fibonacci": [1, 2, 3, 5, 8],
+    "fav_numbers": "6, 29",
+    "secret": {
+      "favorite_brother": null
+    }
+  }
+}

@@ -43,43 +43,26 @@ Topics covered: strings, indexing, functions, lists, sets, arithmetic, helper fu
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
 
-import re
 
-def is_palindrome(x):
-    reverse = x[len(x)::-1]
-    check = re.match(x, reverse)
-    return bool(check)
+def is_palindrome(string_to_check):
+    pass  # TODO: delete this entire line and complete this function
 
 
 def list_overlap(first_list, second_list):
-    first_set = set(first_list)
-    second_set = set(second_list)
-    return list(first_set & second_set)
+    pass  # TODO: delete this entire line and complete this function
 
 
 def factors(dividend):
-    value = set()
-    for x in range(1, dividend + 1):
-        if dividend % x == 0:
-            value.add(x)
-    return list(value)
+    pass  # TODO: delete this entire line and complete this function
 
 
 def is_prime(number):
-    for x in range(2, number + 1):
-        if number % x == 0:
-            return False
-        else:
-            return True
+    pass  # TODO: delete this entire line and complete this function
 
 
 def text_at_line(line_number, filename="lesson_5_problem_5.txt"):
-    file = open(filename)
-    all_lines = file.readlines()
-    line = str(all_lines[line_number - 1])
+    pass  # TODO: delete this entire line and complete this function
 
-    return line.rstrip("\n")
-            
 
 # --- DO NOT EDIT BELOW THIS LINE --- #
 class TestCase:
@@ -125,11 +108,9 @@ tcs = [TestCase(problem_number=1, description="Determine if a string is a palind
                 in_vals=("racecar", "dodo", "rotator", "moomoo"), out_vals=(True, False, True, False)),
        TestCase(problem_number=2, description="Find the overlapping elements in two lists.", test_function=list_overlap,
                 in_vals=(([1, 2, 3, 5], [3, 5]), ([0, -5, 16], [37, 12, 16, 5]), ([5, 5, 6, 7], [5, 5, 6, 7])),
-                out_vals=(([3, 5]), ([16]), ([5, 6, 7])), unsorted=True),
-                   #the second out_vals should have a 16
+                out_vals=(([3, 5]), ([]), ([5, 6, 7])), unsorted=True),
        TestCase(problem_number=3, description="List all of the factors for a given integer", test_function=factors,
-                in_vals=(6, 11, 18), out_vals=(([1, 2, 3, 6]), ([1, 11]), ([1, 2, 3, 6, 9, 18]))),
-                   #the third out_vals should'nt have a 4 as a factor of 18
+                in_vals=(6, 11, 18), out_vals=(([1, 2, 3, 6]), ([1, 11]), ([1, 2, 3, 4, 6, 9, 18]))),
        TestCase(problem_number=4, description="Determine if a number is prime.", test_function=is_prime,
                 in_vals=(6, 11, 18), out_vals=(False, True, False)),
        TestCase(problem_number=5, description="Find a line of text within a file.", test_function=text_at_line,

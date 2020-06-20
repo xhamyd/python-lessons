@@ -6,31 +6,19 @@ spot in the sequence. Assuming the following sequence for Fibonacci:
 
 The 1st Fibonacci Number would be 1 (nth_fibonacci(1) == 1)
 The 2nd Fibonacci Number would be 1 (nth_fibonacci(2) == 1)
-The 3rd Fibonacci Number would be 2 (nth_fibonacci(3) == 2)
-The 4th Fibonacci Number would be 3 (nth_fibonacci(4) == 3)
+The 3rd Fibonacci Number would be 1 (nth_fibonacci(3) == 2)
+The 4th Fibonacci Number would be 1 (nth_fibonacci(4) == 3)
 
 Topics covered: functions, lists, for/while loops, arithmetic operations, variables
 
 """
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
-# Program to display the Fibonacci sequence up to n-th term
 
-def nth_fibonacci(nth_term):
-    n1, n2 = 0, 1
-    count = 0
-    if nth_term > 0:
-        while count < nth_term:
-           nth = n1 + n2
-           n1 = n2
-           n2 = nth
-           count += 1
-    
-        return n1
-        
-    else:
-        return "Start from 1st term"
-        
+
+def nth_fibonacci(x):
+    pass  # TODO: complete this function
+
 # --- DO NOT EDIT BELOW THIS LINE --- #
 
 

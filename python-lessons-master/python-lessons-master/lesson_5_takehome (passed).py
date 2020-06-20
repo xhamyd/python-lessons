@@ -13,7 +13,7 @@ palindrome is it is the spelled the same backwards and forwards.
 2) Given two lists of varying lengths, return a list of the common elements between both lists.
 
     [1, 2, 3, 5] and [3, 4, 5] returns [3, 5]
-    [0, -5, 16] and [37, 12, 16, 5] returns []
+    [0, -5, 16] and [37, 12, 16, 5] returns [16]
     [5, 5, 7, 6] and [5, 5, 7, 6] returns [5, 7, 6]
 
 3) Given a single integer argument, return a list of its integer factors/divisors. Bonus points if you use list
@@ -21,7 +21,7 @@ comprehension.
 
     [1, 2, 3, 6] are all of the factors for 6 (factors(6) == [1, 2, 3, 6])
     [1, 11] are all of the factors for 11 (factors(11) == [1, 11])
-    [1, 2, 3, 4, 6, 9, 18] are all of the factors for 18 (factors(18) == [1, 2, 3, 4, 6, 9, 18])
+    [1, 2, 3, 6, 9, 18] are all of the factors for 18 (factors(18) == [1, 2, 3, 6, 9, 18])
 
 4) Using your answer in Question 3, determine if a given integer is prime or not. You should call the `factors` function
 inside of your `is_prime` function.
@@ -44,6 +44,7 @@ Topics covered: strings, indexing, functions, lists, sets, arithmetic, helper fu
 # --- DO NOT EDIT ABOVE THIS LINE --- #
 
 import re
+
 
 def is_palindrome(x):
     reverse = x[len(x)::-1]

@@ -4,10 +4,16 @@ Lesson 7
 
 1) In 'lesson_7_problem_1.json' file, you will find several holidays of varying statuses (i.e. Federal, Proposed,
 Celebrated). We will be using this JSON file in future assignments, but for this problem:
-  - Read the JSON into Python, using any Python object you prefer
-  - Return the number of holidays provided that are in the month of June (month == 6)
+    - Read the JSON into Python, using any Python object you prefer
+    - Return the number of holidays provided that are in the month of June (month == 6)
 
-2) Power sets
+2) A power set (https://en.wikipedia.org/wiki/Power_set) is defined as the set containing all combinations of the
+elements in the original set. For this exercise, do not use any high-level libraries or constructors in this assignment
+(i.e. use the built-in set() function). For example:
+
+    The power set of {1} is {{}, {1}}
+    The power set of {2, 3} is {{}, {2}, {3}, {2, 3}}
+    The power set of {4, 5, 6} is {{}, {4}, {5}, {6}, {4, 5}, {5, 6}, {4, 6}, {4, 5, 6}}
 
 3) Timesheet class
 
@@ -28,7 +34,7 @@ def june_holidays(birthday_json_file):
     pass  # TODO: delete this entire line and complete this function
 
 
-def is_magic_square(square_array):
+def power_set(original_set):
     pass  # TODO: delete this entire line and complete this function
 
 
@@ -78,12 +84,9 @@ def test_1(function_under_test, val_num):
 
 
 def test_2(function_under_test, val_num):
-    in_vals = ([[2, 2], [2, 2]],
-               [[5, 15, 16, 2], [10, 8, 7, 13], [6, 12, 11, 9], [17, 3, 4, 14]],
-               [[4, 7, 1, 10], [3, 8, 2, 9], [9, 3, 8, 2], [6, 4, 11, 1]],
-               [[2, 7, 6], [9, 5, 1], [4, 3, 8]])
-    out_vals = (False, True, False, True)
-    assert val_num in range(4), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
+    in_vals = ({1}, {2, 3}, {4, 5, 6})
+    out_vals = ({{}, {1}}, {{}, {2}, {3}, {2, 3}}, {{}, {4}, {5}, {6}, {4, 5}, {4, 6}, {5, 6}, {4, 5, 6}})
+    assert val_num in range(3), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
 
     in_val, out_val = in_vals[val_num], out_vals[val_num]
     actual_val = function_under_test(in_val)
@@ -116,8 +119,8 @@ def test_5(function_under_test, val_num):
 
 tcs = [TestCase(problem_number=1, description="Read JSON file to count number of holidays in June.",
                 function_under_test=june_holidays, testing_function=test_1, number_of_test_cases=1),
-       TestCase(problem_number=2, description="Determine a magic square or not.", function_under_test=is_magic_square,
-                testing_function=test_2, number_of_test_cases=4),
+       TestCase(problem_number=2, description="Return the power set of the provided set.",
+                function_under_test=power_set, testing_function=test_2, number_of_test_cases=3),
        TestCase(problem_number=3, description="Find first version with broken slurp juice.",
                 function_under_test=when_did_slurp_break, testing_function=test_3, number_of_test_cases=1),
        TestCase(problem_number=4, description="Sort list of tuples by second element.",

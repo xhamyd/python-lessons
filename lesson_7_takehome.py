@@ -79,7 +79,7 @@ def test_1(function_under_test, val_num):
     assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     in_val, out_val = JSON_FILE, 2
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_2(function_under_test, val_num):
@@ -89,7 +89,7 @@ def test_2(function_under_test, val_num):
 
     in_val, out_val = in_vals[val_num], out_vals[val_num]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_3(function_under_test, val_num):
@@ -126,6 +126,7 @@ def test_3(function_under_test, val_num):
     json_res = jread.read()
     if json_res is not False:
         return "JSONReader.read()", "False", json_res
+    return True
 
 
 tcs = [TestCase(problem_number=1, description="Read JSON file to count number of holidays in June.",

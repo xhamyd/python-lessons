@@ -119,7 +119,7 @@ def test_1(function_under_test, val_num):
         in_val.close()
         actual_val = function_under_test(in_val)
         os.remove(in_val.name)
-        return True if actual_val == out_val else in_val, out_val, actual_val
+        return True if actual_val == out_val else (in_val, out_val, actual_val)
     else:
         in_val, out_val = open("tempfile1.txt", "w"), False
         actual_val = function_under_test(in_val)
@@ -127,7 +127,7 @@ def test_1(function_under_test, val_num):
             in_val.close()
             os.remove(in_val.name)
             return in_val, out_val, actual_val
-        return True if actual_val == out_val else in_val, out_val, actual_val
+        return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_2(function_under_test, val_num):
@@ -140,14 +140,14 @@ def test_2(function_under_test, val_num):
 
     in_val, out_val = in_vals[val_num], out_vals[val_num]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_3(function_under_test, val_num):
     assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     in_val, out_val = FORTNITE_VERSIONS, FORTNITE_VERSIONS[FIRST_BAD_VERSION]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else "[FORTNITE_VERSIONS]", out_val, actual_val
+    return True if actual_val == out_val else ("[FORTNITE_VERSIONS]", out_val, actual_val)
 
 
 def test_4(function_under_test, val_num):
@@ -157,14 +157,14 @@ def test_4(function_under_test, val_num):
     assert val_num in range(3), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     in_val, out_val = in_vals[val_num], out_vals[val_num]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_5(function_under_test, val_num):
     assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     in_val = random.choices(range(10), k=random.randint(1, 10))
     out_val, actual_val = max(in_val), function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", function_under_test=is_closed,

@@ -2,7 +2,7 @@
 Lesson 8
 --------
 
-1) Tic Tac Toe
+1) Tetris Line Clear
 
 2) RegEx over text files
 
@@ -48,7 +48,11 @@ class TestCase:
 
 # Test Cases
 def test_1(function_under_test, val_num):
-    return True
+    # TODO: Provide JPGs for each test case
+    in_val, out_val = [['-'] * 8] * 10, False
+    actual_val = function_under_test(in_val)
+    return True if actual_val == out_val else ("<blank_board>", out_val, actual_val)
+
 
 def test_2(function_under_test, val_num):
     return True

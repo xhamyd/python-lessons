@@ -2,11 +2,35 @@
 Lesson 8
 --------
 
-1) Tetris Line Clear
+1) A Tetris board can be represented by a 2D List (i.e. lists within a list), using 'x' to indicate a space filled by a
+Tetrimino and '-' to indicate a blank space. Please refer to the lesson_8_problem_1*.png files for a visual
+representation of these boards. Given one of these boards, determine whether the board has a full horizontal row filled
+by Tetriminoes (i.e. the board has a "row clear" ready), returning a simple Boolean (i.e. True/False).
 
-2) Detect if a string contains a footnote marker
+    - For lesson_8_problem_1a.png, tetris_line_clear should return False.
+    - For lesson_8_problem_1b.png, tetris_line_clear should return False.
+    - For lesson_8_problem_1c.png, tetris_line_clear should return True.
 
-3) Find the mean, median, and range of 2020 holidays using the days within the year as your key metric. BONUS: Plot it!
+2) On Wikipedia (and several others websites), many of the article's sentences are followed by a hyperlinked footnote,
+using the `[#]` notation (eg. 'This is a sentence.[2]'). Given one of these text statements, check if a footnote is in
+the string using RegEx, and return the footnote number if it exists.
+
+    - footnote_detector(" winning the 1988 Brit Award for Best British Single.[12]") => 12
+    - footnote_detector("...comeback in 2007, becoming an Internet phenomenon when the music video for ") => None
+    - footnote_detector("2016 album 50 debuted in the UK at No. 1.[8]") => 8
+
+3) In last week's problem, you imported a JSON file containing select 2020 Holidays. Using this same file, please
+calculate the following statistics of these holidays using the cumulative days within the year as your key metric
+(i.e. March 25, 2020 => 84).
+
+    - mean
+    - median
+    - range
+
+Return these statistics as this tuple: (holiday_mean, holiday_median, holiday_range). You should use the helping
+functions `convert_date_to_number(month, day, year)` and `convert_number_to_date(day_num)` in your solution.
+
+BONUS: Plot the holiday cumulative days in matplotlib!
 
 4) Suppose you have a unsorted stream of note pitch values, all in A minor. Due to a bad programming bug, there can
 sometimes be one note in the stream that will randomly be altered out of the scale (i.e. turn into a black key). You
@@ -15,14 +39,17 @@ must find this offending note using the following formula:
         - find_bad_note([]) => None
     - If note_stream has only one note, check if the remaining note is still in the key or not
         - find_bad_note(["A"]) => None
-        - find_bad_note(["A#"]) => "A#
+        - find_bad_note(["A#"]) => "A#"
     - Else, split the stream in half and run both halves through this function, `or`ing the result together
         - find_bad_note(["E" "F" "G"]) => None
         - find_bad_note(["A" "B" "C" "D#" "E"]) => "D#"
 
 NOTE: You do not need to provide a function docstring for this problem
 
-5) Concatenate list of strings
+5) In other languages, strings are built by creating a list of single characters and combining them into one object.
+Supposing you get a character array from other program, build the function that combines all of these characters into
+a single string and return that object. You will also be tested on how fast your code executes, so try to use best
+optimization principles in your solution.
 
 Topics covered: 2D lists, RegEx, numpy, statistics, recursion, search, optimization, list comprehensions
 

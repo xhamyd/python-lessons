@@ -36,18 +36,88 @@ import os
 JSON_FILE = "lesson_7_problem_1.json"
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
+import json
+import re
 
 
-def june_holidays(birthday_json_file):
-    pass  # TODO: delete this entire line and complete this function
+def june_holidays(JSON_FILE):
+    pass
+"""
+   with open (JSON_FILE) as f:
+        holidays = json.load(f)
+        for i in range(0):
+            count = 0
+            if holidays.value(i) == 6:
+                    count = count + 1
+                    
+        return count
+        f.close
+
+
+I couldn't figure out how to specifically look for the month in the dictionary. What I wanted to do in this,
+was to first load in the JSON file as the variable, "Holidays", then iterate through the dictionary to find
+and count how many times 'month' = 6. I was expecting months to be a key, but I think i messed that up
+by assigning it to a variable.
+
+"""
 
 
 def power_set(original_set):
-    pass  # TODO: delete this entire line and complete this function
+    length = len(original_set)
+    for i in range(1 << length):
+        for j in range(length):
+            if (i & (1 << j)):
+                return [original_set[j]]
 
+"""
+    length = len(original_set)
+    print([])
+    for i in range(0, length):
+        print([original_set[i]])
 
+    if length>1:
+        for i in range(0, length-1):
+            for j in range (0, length-1):
+                print([i, j+1])
+            
+    elif length>2:
+        print(original_set)
+
+Here's what I had originally. It was close, though I messed around with it too many times and it fell apart.
+The other "solution" is from https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset.
+
+What I was trying to do was first, find out how many elements there are, print out the none element,
+then print each element separately, followed by the permutations, and then the whole set as one list by itself.
+
+For some reason, returns stop the function short, and prints don't work for passing the test,
+so it still is unsolved.
+
+"""
+    
 def create_reader_classes(binary_filename, binary_type_of_file, json_filename, json_type_of_file):
-    pass  # TODO: delete this entire line and complete this function
+    class FileReader:
+        def __init__ (self, filename, type_of_file):
+            self.name = filename
+            self.type = type_of_file
+
+        def read(self):
+            return self.name.read()
+
+    class JSONReader(FileReader):
+        def __init__ (self, json_dict):
+            self.dict = json_dict
+
+        def read(self):
+            try:
+                json_dict = dict(self.dict)
+                return json_dict
+            except:
+                print("Failure to load")
+            
+"""
+Don't even know
+
+"""
 
 
 # --- DO NOT EDIT BELOW THIS LINE --- #

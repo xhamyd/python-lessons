@@ -67,23 +67,95 @@ def is_slurp_juice_broken(version_string): return float(version_string) >= float
 
 
 def is_closed(file_pointer):
-    pass  # TODO: delete this entire line and complete this function
+    if file_pointer.closed:
+        return True
+    else:
+        return False
 
 
 def is_magic_square(square_array):
-    pass  # TODO: delete this entire line and complete this function
+    num = len(square_array)
+    # Because I'm working with different sized arrays, I had to define a variable for that.
+    if (square_array[0] == square_array[1]):
+        return False
+        # Check for uniqueness
+
+    s = 0
+    s2 = 0
+    # Defining the two diagonal sums beforehand
+
+    for i in range(0, num):
+        s = s + square_array[i][i]
+    # Taking the first number of the first row and adding it into the sum, then the second number of the second row and so on
+
+    for i in range(0, num):
+        s2 = s2 + square_array[i][num - i - 1]
+    # Taking the last number of the first row, add to sum, then the second to last number of the second row and so on
+
+    if (s != s2):
+        return False
+    # If the two sums don't equal each other, then it isn't a magic square
+
+    for i in range(0, num):
+        rowSum = 0;
+        for j in range(0, num):
+            rowSum += square_array[i][j]
+        # Taking the first number of the first set and adding that to the sum, then the second number and on so,
+        # then checking the first row sum against our diagonal sum. If it returns True, reset the row sum and then
+        # calculate and check the rest of the rows
+
+        if (rowSum != s):
+            return False
+    # If the sum of any row doesn't match the diagonal sum calculated earlier, then this isn't a magic square
+
+    for i in range(0, num):
+        colSum = 0
+        for j in range(0, num):
+            colSum += square_array[j][i]
+        # Same process for checking each column against the diagonal sum
+
+        if (s != colSum):
+            return False
+    # Same process here as well
+
+    return True
+    # If all of those parameters pass, then this is a magic square
 
 
 def when_did_slurp_break(version_list):
-    pass  # TODO: delete this entire line and complete this function
+    for i in range (0,26):
+        version = version_list[i]
+    # Starting from the first version, setting that list value into variable
+
+        if is_slurp_juice_broken(version) is True:
+            return version
+    # Running the function onto the version, and if the version is broken, returning that version number
 
 
 def second_element_sort(tuple_list):
-    pass  # TODO: delete this entire line and complete this function
+    num = len(tuple_list)
+    # First have to find out how many subtuples are in the tuple for iteration
+
+    for i in range(0, num):
+        for j in range(0, num - i - 1):
+            if (tuple_list[j][1] > tuple_list[j + 1][1]):
+                temp = tuple_list[j]
+                tuple_list[j] = tuple_list[j + 1]
+                tuple_list[j + 1] = temp
+    # Compare the first subset's second element to the second subset, and if it is greater than the second's,
+    # resort the list so that the first subset now comes second. Rinse and repeat for all subtuples.
+
+    return tuple_list
+
+    # I was very close on this one, but had to borrow some code.
+    # https://www.geeksforgeeks.org/python-program-to-sort-a-list-of-tuples-by-second-item/
 
 
 def maximum_value(value_list):
-    pass  # TODO: delete this entire line and complete this function
+    num = len(value_list)
+
+    if value_list[0] > value_list[1]:
+        value_list[1] = value_list[2]
 
 
 # --- DO NOT EDIT BELOW THIS LINE --- #
@@ -119,15 +191,17 @@ def test_1(function_under_test, val_num):
         in_val.close()
         actual_val = function_under_test(in_val)
         os.remove(in_val.name)
-        return True if actual_val == out_val else in_val, out_val, actual_val
+        return True if actual_val == out_val else (in_val, out_val, actual_val)
     else:
         in_val, out_val = open("tempfile1.txt", "w"), False
         actual_val = function_under_test(in_val)
+        if actual_val is not False:
+            return in_val, out_val, actual_val
         if not in_val.closed:
             in_val.close()
             os.remove(in_val.name)
-            return in_val, out_val, actual_val
-        return True if actual_val == out_val else in_val, out_val, actual_val
+            return in_val, "<File was closed>", "<Did not close the file>"
+        return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_2(function_under_test, val_num):
@@ -140,14 +214,14 @@ def test_2(function_under_test, val_num):
 
     in_val, out_val = in_vals[val_num], out_vals[val_num]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_3(function_under_test, val_num):
     assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     in_val, out_val = FORTNITE_VERSIONS, FORTNITE_VERSIONS[FIRST_BAD_VERSION]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else "[FORTNITE_VERSIONS]", out_val, actual_val
+    return True if actual_val == out_val else ("[FORTNITE_VERSIONS]", out_val, actual_val)
 
 
 def test_4(function_under_test, val_num):
@@ -157,14 +231,14 @@ def test_4(function_under_test, val_num):
     assert val_num in range(3), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     in_val, out_val = in_vals[val_num], out_vals[val_num]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 def test_5(function_under_test, val_num):
     assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     in_val = random.choices(range(10), k=random.randint(1, 10))
     out_val, actual_val = max(in_val), function_under_test(in_val)
-    return True if actual_val == out_val else in_val, out_val, actual_val
+    return True if actual_val == out_val else (in_val, out_val, actual_val)
 
 
 tcs = [TestCase(problem_number=1, description="Determine if a file is closed.", function_under_test=is_closed,

@@ -1,1 +1,1 @@
-Foo c bar
+Foo © bar

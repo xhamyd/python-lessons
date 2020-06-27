@@ -36,88 +36,79 @@ import os
 JSON_FILE = "lesson_7_problem_1.json"
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
+
 import json
-import re
 
 
-def june_holidays(JSON_FILE):
-    pass
-"""
-   with open (JSON_FILE) as f:
+def june_holidays(json_file=JSON_FILE):
+    """
+    I couldn't figure out how to specifically look for the month in the dictionary. What I wanted to do in this,
+    was to first load in the JSON file as the variable, "Holidays", then iterate through the dictionary to find
+    and count how many times 'month' = 6. I was expecting months to be a key, but I think i messed that up
+    by assigning it to a variable.
+
+    """
+    with open(json_file, "r") as f:
         holidays = json.load(f)
-        for i in range(0):
-            count = 0
-            if holidays.value(i) == 6:
-                    count = count + 1
-                    
+        count = 0
+        for holiday_dicts in holidays["holidays"]:
+            if holiday_dicts["month"] == 6:
+                count += 1
         return count
-        f.close
-
-
-I couldn't figure out how to specifically look for the month in the dictionary. What I wanted to do in this,
-was to first load in the JSON file as the variable, "Holidays", then iterate through the dictionary to find
-and count how many times 'month' = 6. I was expecting months to be a key, but I think i messed that up
-by assigning it to a variable.
-
-"""
+    # f is automatically closed for us
 
 
 def power_set(original_set):
-    length = len(original_set)
-    for i in range(1 << length):
-        for j in range(length):
-            if (i & (1 << j)):
-                return [original_set[j]]
+    """
+    Here's what I had originally. It was close, though I messed around with it too many times and it fell apart.
+    The other "solution" is from https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset.
 
-"""
-    length = len(original_set)
-    print([])
-    for i in range(0, length):
-        print([original_set[i]])
+    What I was trying to do was first, find out how many elements there are, print out the none element,
+    then print each element separately, followed by the permutations, and then the whole set as one list by itself.
 
-    if length>1:
-        for i in range(0, length-1):
-            for j in range (0, length-1):
-                print([i, j+1])
-            
-    elif length>2:
-        print(original_set)
+    For some reason, returns stop the function short, and prints don't work for passing the test,
+    so it still is unsolved.
 
-Here's what I had originally. It was close, though I messed around with it too many times and it fell apart.
-The other "solution" is from https://stackoverflow.com/questions/1482308/how-to-get-all-subsets-of-a-set-powerset.
+    """
+    res = []
+    x = len(original_set)
+    for i in range(2 ** x):
+        tmp = []
+        for j in range(x):
+            if i & 2 ** j:
+                tmp.append(original_set[j])
+        res.append(tmp)
+    return res
 
-What I was trying to do was first, find out how many elements there are, print out the none element,
-then print each element separately, followed by the permutations, and then the whole set as one list by itself.
 
-For some reason, returns stop the function short, and prints don't work for passing the test,
-so it still is unsolved.
+def create_reader_classes():
+    """
+    Don't even know.
 
-"""
-    
-def create_reader_classes(binary_filename, binary_type_of_file, json_filename, json_type_of_file):
+    """
     class FileReader:
-        def __init__ (self, filename, type_of_file):
+        def __init__(self, filename, type_of_file):
             self.name = filename
             self.type = type_of_file
 
         def read(self):
-            return self.name.read()
+            with open(self.name, "rb") as f:
+                return f.read().decode("utf-8")
 
     class JSONReader(FileReader):
-        def __init__ (self, json_dict):
-            self.dict = json_dict
+        def __init__(self, filename, type_of_file):
+            super().__init__(filename, type_of_file)
+            self.json_dict = None
 
         def read(self):
             try:
-                json_dict = dict(self.dict)
-                return json_dict
-            except:
-                print("Failure to load")
-            
-"""
-Don't even know
+                with open(self.name, "r") as f:
+                    self.json_dict = json.load(f)
+                return True
+            except Exception as err:
+                return False
 
-"""
+    return FileReader, JSONReader
 
 
 # --- DO NOT EDIT BELOW THIS LINE --- #
@@ -159,17 +150,17 @@ def test_2(function_under_test, val_num):
 
     in_val, out_val = in_vals[val_num], out_vals[val_num]
     actual_val = function_under_test(in_val)
-    return True if actual_val == out_val else (in_val, out_val, actual_val)
+    return True if sorted(actual_val) == sorted(out_val) else (in_val, out_val, actual_val)
 
 
 def test_3(function_under_test, val_num):
     assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
-    in_val = ("binary_file.b", "binary", "lesson_7_problem_3.json", "JSON")
-    actual_val = function_under_test(*in_val)
+    in_val = ("lesson_7_problem_3.b", "binary", "lesson_7_problem_3.json", "JSON")
+    actual_val = function_under_test()
     if not isinstance(actual_val, tuple) or len(actual_val) != 2:
         return in_val, ("<class FileReader>", "<class JSONReader>"), actual_val
     fr_class, jr_class = actual_val
-    fread, jread = fr_class(), jr_class()
+    fread, jread = fr_class(in_val[0], in_val[1]), jr_class(in_val[2], in_val[3])
     binary_output = fread.read()
     if type(binary_output) == bytes:
         binary_output = binary_output.decode('utf-8')
@@ -192,8 +183,10 @@ def test_3(function_under_test, val_num):
     }
     if json_output != json_dict:
         return "JSONReader.read()", json_dict, json_output
-    os.remove("lesson_7_problem_1.json")
+    os.remove("lesson_7_problem_3.json")
     json_res = jread.read()
+    with open("lesson_7_problem_3.json", "w") as json_file:
+        json.dump(json_dict, json_file)
     if json_res is not False:
         return "JSONReader.read()", "False", json_res
     return True

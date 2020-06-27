@@ -272,6 +272,7 @@ def test_4(function_under_test, val_num):
 
 
 def test_5(function_under_test, val_num):
+    assert val_num in range(1), ValueError(f"TESTING ERROR: Improper test case number provided: {val_num}")
     import string
     import time
     time_threshold = 2.5

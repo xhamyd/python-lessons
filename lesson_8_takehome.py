@@ -73,19 +73,62 @@ def convert_number_to_date(day_num, year=YEAR):
     return start_date + days
 
 # --- DO NOT EDIT ABOVE THIS LINE --- #
-
+import re, json, numpy as np
 
 def tetris_line_clear(board):
-    pass  # TODO: delete this entire line and complete this function
+    """
+For this one, I looked at the files and printing and saw that the list would start at the top, go left to right,
+and then down. I decided to just iterate through each row and compare it to the string that represents a filled line,
+then return True if it did and stop the function short. If this never happened, there would be no break,
+and it would return False in the end.
 
+    """
+    for i in range(0,8):
+        row = board[i]
+        if row == (['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']):
+            return True
+            break
 
+    return False
+    
 def footnote_detector(text):
-    raise NotImplementedError  # TODO: delete this entire line and complete the function
+    """
+I know exactly what I want to write, which is for re.search to search for a pattern between brackets that may
+include up to 2 unknown characters between, and then return that footnote, but I can't figure out what the
+metacharacter is.
+
+    """
+    footnote = re.search(r'^[..]$', text)
+    return footnote
 
 
 def holiday_stats(holiday_json="lesson_7_problem_1.json"):
-    pass  # TODO: delete this entire line and complete this function
+    """
+I started this the same way as last lesson: opened the file, saved it as a variable, then iterated through with
+a for loop using holidays as the key. I then saved each month (minus 1) and day as a variable, and then calculated
+the appropriate amount of cumulative days for each month before. I summed all the days from the start of the year
+for each date, and then appended these to a temporary list. Using NumPy, I put this list into an "array", then
+used in the built-in functions for mean, median and range to return the three values needed.
 
+    """
+
+    with open(holiday_json, 'r') as f:
+        holidays = json.load(f)
+        for holiday_dicts in holidays["holidays"]:
+            month = holiday_dicts["month"] - 1
+            day = holiday_dicts["day"]
+            if month == 2:
+                days = 28
+            elif month % 2 == 0:
+                days = 30
+            else:
+                days = 31
+            summation = (days + day)
+            temp = []
+            temp.append(summation)
+        a = np.array(temp)
+        return np.mean(a), np.average(a), np.ptp(a) 
+        
 
 def find_bad_note(note_stream):
     """
@@ -96,12 +139,33 @@ def find_bad_note(note_stream):
     HINT 2: Since you can't manually split the stream into two parts, use the following function for help:
             left_stream, right_stream = note_stream.split_stream()
 
+    TypeError: Expected string or bytes-like object? What are you feeding me here?
+
+    left_stream, right_stream = note_stream.split_stream()
+    if re.match(r'^#', left_stream) != None:
+        return re.match(r'^#', left_stream)
+    elif re.match(r'^b', left_stream) != None:
+        return re.match(r'^b', left_stream)
+    elif re.match(r'^b', left_stream) == None:
+        return None
+
+    if re.match(r'^#', right_stream) != None:
+        return re.match(r'^#', right_stream)
+    elif re.match(r'^b', right_stream) != None:
+        return re.match(r'^b', right_stream)
+    elif re.match(r'^b', right_stream) == None:
+        return None
+
     """
-    raise NotImplementedError  # TODO: delete this entire line and complete the function
+    
+def combined_string(str_list):  
+    """
+git gud
+
+    """
+    return ''.join(str_list)
 
 
-def combined_string(str_list):
-    pass  # TODO: delete this entire line and complete the function
 
 
 # --- DO NOT EDIT BELOW THIS LINE --- #

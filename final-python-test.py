@@ -136,23 +136,25 @@ def rounded_digits(f_num, **kwargs):
 
 
 """
-7. Sets
-    a. Create sets from a list of elements
-    b. Remove an element from the set in 2 ways (pros/cons)
-    c. Find the elements in both sets
-    d. Find the elements in only one of the sets
+7. Given a provided list of common foods, perform set manipulations on the elements
+    a. Create at least two unique sets from the provided list. Example set classifications:
+        i. `fruits` set, `belongs_in_sandwich` set
+        ii. `red` set, `round` set
+        iii. `sweet` set, `seeded` set
+    b. Use two different ways to remove an element from one of your sets
+        i. Discuss the differences between the two methods
+    c. Use a built-in set function to find the common elements between both sets
+        ex. If A = red_set and B = round_set, then the answer would be {"apple", "tomato"}            
+    d. Use a built-in set function to find the elements found uniquely in only one set
+        ex. If A = red_set and B = round_set, then the answer would be {"orange", "kiwi", "strawberry"}
 
 """
 
-elements = ["apple", "banana", "tomato", "orange", "carrot", "kiwi", "bread", "peanut butter", "lettuce"]
+elements = ["apple", "banana", "tomato", "orange", "carrot", "kiwi", "bread", "peanut butter", "lettuce", "strawberry"]
 
 """
-8. How can I tell python to run a given function in my file automatically?
-    - ex. `python my_test.py`
+8. In lesson_2.py, you created the `foo()` function that prints integers from 1 to a given input argument. Edit that
+Python file to run that function from the command line automatically.
+    - ex. `python my_test.py` should run `foo()`
     
 """
-# my_test.py
-
-
-def abc():
-    print("ABC!")

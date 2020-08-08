@@ -3,29 +3,43 @@
 """
 1. Create a list with the first 10 positive integer numbers.
     a. Create it in three different ways
-        i. Create a one-liner solution
+        i. One of the ways should be a one-liner solution
     b. Discuss the benefits/cons to each method
-    c. Switch the container into a tuple, does each method work?
-    d. What if we have unlimited amount of elements?
+    c. If the original problem asked it in a tuple, does each method still work?
+    d. If the original problem had a very large amount of numbers to use, does each method still work?
 
 """
 
 """
 2. Create a collection to associate days of the week with their number (i.e. 0 <=> Sun, 1 <=> Mon)
     a. Create it in three different ways
-    b. Sort it by day number
-    c. Sort it by second letter of the day (i.e. sAturday, wEdnesday, etc.)
+        i. You can use whatever data structure you'd like (with as much documentation as needed)
+    b. Sort the collection by day number. Is this possible with each creation method?
+    c. Sort it by second letter of the day (i.e. sAturday, wEdnesday, etc.).
+        i. You can use Python's built-in sort() and/or sorted() functions
     d. Flip the association (i.e. days -> nums into nums -> days)
+        i. A documentation update is not good enough, you should actually flip the days with their respective numbers
 
 """
 
 """
 3. Write a function to open a file
     a. Handle reading text files
-    b. Find the first line that has the given word in three different ways
-        i. Default word to search: "TODO"
-    c. Check if the file doesn't exists, is empty, is a text file, and if encoded correctly
-    d. Handle reading JSON files
+        i. Check if the file doesn't exist (return False)
+        ii. Check if the file is even a text file (return False)
+        iii. Check if the file is empty (return False)
+        iv. Check if the file is even encoded correctly (return False)
+    b. If file is readable, return the line number associated with the first line that contains a given word to search
+        i. The word to search is a input argument, defaulted to "TODO"
+        ii. Perform this search in three different ways
+        iii. You may assume the given word to search is only letters (i.e. `[a-zA-Z]+`) 
+    c. In this same function, handle reading JSON files
+        i. Check if the file doesn't exist (return False)
+        ii. Check if the file is even a JSON file (return False)
+        iii. Check if the file is empty (return False)
+    d. If JSON is parsable, return the sum of all the values in the dictionary
+        i. You may assume the following structure: { str: i, str: i, ... }
+        ii. BONUS! Allow for nested dictionaries: { str: i, str: { str: i, str: i, ... }, str: i, ... }
 
 """
 

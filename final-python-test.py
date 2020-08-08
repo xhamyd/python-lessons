@@ -44,10 +44,16 @@
 """
 
 """
-4. Provide a callback function to halve the gain of each sample when processing.
-    a. Write test cases to check your function
+4. Below is a generated list of input audio samples provided. Your sound card uses their own "audio pumping" function
+that takes input audio samples, applies some function to each of them, and outputs the processed samples (in an audio
+stack, this output would then be routed to your speakers' drivers). In order to manipulate the audio samples, you must
+provide a callback function to this audio pump function, which will apply your function to each of the input samples.
+    a. Provide a reference to a function that halves the gain of each sample in a lis.
+        - NOTE: In order to provide your function, delete FILL_ME_IN and replace with the syntax-appropriate code
+    b. BONUS! Write test cases to check your code
 
 """
+# ---- DO NOT EDIT THIS SECTION (start) ---- #
 # [round(x, 2) for x in numpy.sin(range(20))*20]
 input_samples = [0.0, 16.83, 18.19, 2.82, -15.14, -19.18, -5.59, 13.14, 19.79,
                  8.24, -10.88, -20.0, -10.73, 8.4, 19.81, 13.01, -5.76, -19.23,
@@ -56,18 +62,31 @@ input_samples = [0.0, 16.83, 18.19, 2.82, -15.14, -19.18, -5.59, 13.14, 19.79,
 
 def audio_pump(samples, process_fn):
     return process_fn(samples)
+# ---- DO NOT EDIT THIS SECTION (end) ---- #
 
 
-print(audio_pump(input_samples, FILL_ME_IN))
+print(audio_pump(input_samples, FILL_ME_IN))  # TODO: delete FILL_ME_IN and replace with your function pointer
 
 
 """
-5. Write a tic-tac-toe class
+5. Create a tic-tac-toe class that allows for the following code to run successfully.
+    a. An instantiation of your class should create an empty game board
+        i. A starter __str__ method is provided for you so that you can print out the game board for debugging.
+    b. Adding a 3-element tuple (row, col, piece) to your game board should add one player's move to the game board
+    c. Subtracting a 2-element tuple (row, col) should remove any game piece at the specified spot from the game board
+    d. Create a `is_won()` method that outputs the winner of the game board, if one exists
 
 """
 
 
-class TicTacToe: pass
+class TicTacToe:
+
+    def __str__(self):
+        rows = [" - - - "]
+        for row in self.board:
+            rows.append(f"|{'|'.join(row)}|")
+            rows.append(f" - - - ")
+        return "\n".join(rows)
 
 
 board = TicTacToe()
@@ -78,17 +97,27 @@ board += (0, 0, "o")
 board -= (0, 0)
 board += (2, 1, "o")
 board += (0, 0, "x")
+assert(board.is_won() == "no winners yet")
 board += (0, 2, "x")
-print(board.is_won())
+assert(board.is_won() == "x wins!")
+# BONUS!
+# board -= (0, 2, "x")
+# board -= (1, 1, "x")
+# board += (1, 1, "o")
+# assert(board.is_won() == "o wins!")
 
 """
-6. String formatting
-    a. Print out multiplication equations in 3 ways
-        i. Initially, assume two input arguments
-        ii. Then accept any number of arguments
-    b. Print out the rounded digits of a float in 2 ways
-        i. Rounding is a keyword argument only. If not provided, do not have trailing zeros (i.e. "6.")
-    c. Write docstring for both functions
+6. Complete the two functions below using best Python practices
+    a. The first function asks you to take the input arguments and multiply them together. Return a string with the full
+    equation (i.e. "6 * 4 = 24").
+        i. Find 3 different ways to create the string to return
+        ii. Initially, assume only two input arguments
+        iii. Then, accept any number of arguments
+    b. The second function asks you to round a floating-point number and return the resulting number as a string.
+        i. Rounding is a keyword argument only
+            - If not provided, return the number without trailing zeros (i.e. "6.")
+        ii. Find 2 different ways to round the number for the resulting string
+    c. Write docstrings for both functions
     d. Write test cases for both functions
 
 """

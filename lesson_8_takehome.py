@@ -83,12 +83,12 @@ then return True if it did and stop the function short. If this never happened, 
 and it would return False in the end.
 
     """
-    for i in range(0,8):
+    for i in range(board):
         row = board[i]
+        # if "-" not in row:
+        # if row == ['x'] * len(board)
         if row == (['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']):
             return True
-            break
-
     return False
     
 def footnote_detector(text):
@@ -98,7 +98,8 @@ include up to 2 unknown characters between, and then return that footnote, but I
 metacharacter is.
 
     """
-    footnote = re.search(r'^[..]$', text)
+    footnote = re.search(r'^.*\[([0-9]+)\].*$', text)
+    breakpoint()
     return footnote
 
 
@@ -157,7 +158,30 @@ def find_bad_note(note_stream):
         return None
 
     """
-    
+    # - If note_stream is empty, there was no offending note in the stream
+    #     - find_bad_note([]) => None
+    # - Else if note_stream has only one note, check if the remaining note is still in the key or not
+    #     - find_bad_note(["A"]) => None
+    #     - find_bad_note(["A#"]) => "A#"
+    # - Else, split the stream in half and run both halves through this function, `or`ing the result together
+    #     - find_bad_note(["E" "F" "G"]) => None
+    #     - find_bad_note(["A" "B" "C" "D#" "E"]) => "D#"
+
+    if len(note_stream) == 0:
+        return None
+    elif len(note_stream) == 1:
+        if note_stream[0] not in A_MIN_SCALE:
+            return note_stream[0]
+        else:
+            return None
+        # return note_stream[0] if note_stream[0] not in A_MIN_SCALE else None
+    else:
+        left_stream, right_stream = note_stream.split_stream()
+        left_result = find_bad_note(left_stream)
+        right_result = find_bad_note(right_stream)
+        return left_result or right_result
+
+
 def combined_string(str_list):  
     """
 git gud
@@ -357,7 +381,7 @@ def test_5(function_under_test, val_num):
     if not is_iterable(out_val) or len(out_val) != 10_000_000:
         return "[<random_characters>]", "'random_characters'", out_val
     elif end_time - start_time >= time_threshold:
-        return "[<random_characters>]", "execution_time < 5 sec", f"execution_time = {time_threshold} sec"
+        return "[<random_characters>]", "execution_time < 2.5 sec", f"execution_time = {time_threshold} sec"
     else:
         return True if "".join(in_val[:10]) == out_val[:10] else (f'{in_val[:10]}...'.replace("]...", " ...]"),
                                                                   f"{''.join(in_val[:10])}...",

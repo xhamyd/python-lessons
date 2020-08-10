@@ -99,7 +99,6 @@ metacharacter is.
 
     """
     footnote = re.search(r'^.*\[([0-9]+)\].*$', text)
-    breakpoint()
     return footnote
 
 

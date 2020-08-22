@@ -10,6 +10,22 @@
 
 """
 
+#tuples are immutable (non-modifiable)
+
+def foo():
+    num = []
+    for i in range(1,11):
+        num.append(i)
+
+    return num
+        
+print(list[i for i in range(1,11) if i % 2 == 0])
+
+# list()
+# []
+print({1,2,3,4,5,6,7,8,9,10})
+
+
 """
 2. Create a collection to associate days of the week with their number (i.e. 0 <=> Sun, 1 <=> Mon)
     a. Create it in three different ways
@@ -21,6 +37,20 @@
         i. A documentation update is not good enough, you should actually flip the days with their respective numbers
 
 """
+
+#each element of a set is unique===
+
+def snek():
+    week = dict(Sun=0, Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6)
+
+def kurb():
+    week_two_baby = {'Sun':0, 'Mon':1, 'Tue':2, 'Wed':3, 'Thu':4, 'Fri':5, 'Sat':6}
+
+def blob():
+    week_three = [('Sun', 0), ('Mon', 1), ('Tues', 2), ('Wed', 3), ('Thurs', 4), ('Fri': 5), ('Sat': 6)]
+    week_three.sort(key=lambda e: e[0][1])
+    sorted(week_three)
+
 
 """
 3. Write a function to open a file
@@ -42,6 +72,29 @@
         ii. BONUS! Allow for nested dictionaries: { str: i, str: { str: i, str: i, ... }, str: i, ... }
 
 """
+
+def hecking_heck(x):
+    elif x.endswith('.txt'): 
+        try:
+            with open(x, 'r', encoding='UTF-8') as f:
+                falco = f.readlines()
+
+                if len(f.readlines()) == 0:
+                    raise EOFError
+
+            return falco
+
+        except FileNotFoundError:
+            raise NameError
+
+        except UnicodeError:
+            raise ValueError
+        
+    else:
+        print("I hate you, you are the worst")
+        print("Would you steal a car?")
+        raise ValueError
+
 
 """
 4. Below is a generated list of input audio samples provided. Your sound card uses their own "audio pumping" function
@@ -126,8 +179,29 @@ assert(board.is_won() == "x wins!")
 # spelled_out_multiplication(6, 4) ==> "6 * 4 = 24"
 # spelled_out_multiplication(6, 2, 5) ==> "6 * 2 * 5 = 60"
 def spelled_out_multiplication(*args):
-    pass
+    """
+    This function takes any amount of integers, and will print those integers in spelled out multiplication as one string.
 
+    Args:
+        args (tuple): collection of varying number of integers to be multiplied
+
+    Returns:
+        str: The string representing the multiplication equation.
+
+    """
+    temp = []
+    product = 1
+    for i in range(len(args)):
+        product *= args[i]
+        temp.append(args[i])
+        temp.append(' * ')
+    temp.append(' = ')
+    temp.append(str(product))
+
+    return ''.join(temp)
+
+    return str(args[0]) + ' * ' + str(args[1]) + ' = ' + str(args[0]*args[1])
+    return f'{args[0]} * {args[1]} = {args[0] * args[1]}'
 
 # rounded_digits(3.1415, rounding=3) ==> "3.142"
 # rounded_digits(6.28) ==> "6."
@@ -156,5 +230,5 @@ elements = ["apple", "banana", "tomato", "orange", "carrot", "kiwi", "bread", "p
 8. In lesson_2.py, you created the `foo()` function that prints integers from 1 to a given input argument. Edit that
 Python file to run that function from the command line automatically.
     - ex. `python my_test.py` should run `foo()`
-    
+    # if name == main
 """

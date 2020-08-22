@@ -117,8 +117,20 @@ def audio_pump(samples, process_fn):
     return process_fn(samples)
 # ---- DO NOT EDIT THIS SECTION (end) ---- #
 
+def audio_process():
+    for i in range(0,len(input_samples)):
+        halve = input_samples(i)/2
+        input_samples.replace(i, halve)
 
-print(audio_pump(input_samples, FILL_ME_IN))  # TODO: delete FILL_ME_IN and replace with your function pointer
+    return input_samples
+
+if audio_process([16.83, 18.19, 2.82]) == [8.415, 9.095, 1.41) is True:
+    return "Good job! You actually did something right for once, numnuts!"
+else:
+    raise ValueError
+    return "Good job! And by that, I mean, horrible job!"
+
+print(audio_pump(input_samples, audio_process))  # TODO: delete FILL_ME_IN and replace with your function pointer
 
 
 """
@@ -133,6 +145,11 @@ print(audio_pump(input_samples, FILL_ME_IN))  # TODO: delete FILL_ME_IN and repl
 
 
 class TicTacToe:
+    def __init__(self, row, col, piece, board):
+    self.row = row
+    self.col = col
+    self.piece = piece
+    self.board = board
 
     def __str__(self):
         rows = [" - - - "]
@@ -141,6 +158,24 @@ class TicTacToe:
             rows.append(f" - - - ")
         return "\n".join(rows)
 
+    def add(self):
+        self.board = [" - - - ", " - - - ", " - - - "]
+        for i in range(0, len(board)):
+            for j in range(1, len(board)):
+            if i == 0 or i%3 == 0:
+                row = board(i)
+                if j == 1 or (j-1)%3 == 0:
+                    col = board(j)
+            
+
+    def subtract(self):
+        
+
+    def is_won(self):
+        if board.is_won(True):
+            print(self.piece + "wins!")
+
+#I'm getting confused just thinking about this one.
 
 board = TicTacToe()
 board += (1, 1, "x")
@@ -223,7 +258,37 @@ def rounded_digits(f_num, **kwargs):
         ex. If A = red_set and B = round_set, then the answer would be {"orange", "kiwi", "strawberry"}
 
 """
+class Groups(elements):
+    def __init__(self, fruits, belongs_in_sandwich)
+    self.fruits = fruits
+    self.belongs_in_sandwich = sandwich
 
+    def fruits(self):
+        for i in range(0, len(elements)):
+            if elements[i] = "apple", "banana", "tomato", "orange", "kiwi" or "strawberry"
+                fruits += elements[i]
+        str(fruits)
+        fruits.join(", ")
+        print("These are fruits: " + fruits)
+
+    def belongs_in_sandwich(self);
+        for i in range (0, len(elements)):
+            if elements[i] = "banana", "tomato", "peanut butter", or "lettuce"
+                sandwich += elements[i]
+        str(sandwich)
+        sandwich.join(", ")
+        print("These belong in a sandwich: " + sandwich)
+
+    def remove(self):
+        self.remove(element)
+
+    # This way is simpler, but also requires an additional line if something would need to take its place.
+        
+    def remove_two(self):
+        self.replace("i", "j")
+
+    # This way is cooler, and really a pro gamer move.
+        
 elements = ["apple", "banana", "tomato", "orange", "carrot", "kiwi", "bread", "peanut butter", "lettuce", "strawberry"]
 
 """

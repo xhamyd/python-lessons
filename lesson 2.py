@@ -16,3 +16,5 @@ def foo():
 if __name__ == "__main__":
     print(__name__, type(__name__))
     print(foo())
+
+foo()

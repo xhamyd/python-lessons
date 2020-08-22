@@ -19,7 +19,7 @@ def foo():
 
     return num
         
-print(list[i for i in range(1,11) if i % 2 == 0])
+print(list(i for i in range(1,11) if i % 2 == 0))
 
 # list()
 # []
@@ -47,7 +47,7 @@ def kurb():
     week_two_baby = {'Sun':0, 'Mon':1, 'Tue':2, 'Wed':3, 'Thu':4, 'Fri':5, 'Sat':6}
 
 def blob():
-    week_three = [('Sun', 0), ('Mon', 1), ('Tues', 2), ('Wed', 3), ('Thurs', 4), ('Fri': 5), ('Sat': 6)]
+    week_three = [('Sun', 0), ('Mon', 1), ('Tues', 2), ('Wed', 3), ('Thurs', 4), ('Fri', 5), ('Sat', 6)]
     week_three.sort(key=lambda e: e[0][1])
     sorted(week_three)
 
@@ -74,7 +74,7 @@ def blob():
 """
 
 def hecking_heck(x):
-    elif x.endswith('.txt'): 
+    if x.endswith('.txt'): 
         try:
             with open(x, 'r', encoding='UTF-8') as f:
                 falco = f.readlines()
@@ -117,20 +117,21 @@ def audio_pump(samples, process_fn):
     return process_fn(samples)
 # ---- DO NOT EDIT THIS SECTION (end) ---- #
 
-def audio_process():
+def audio_process(input_samples):
     for i in range(0,len(input_samples)):
         halve = input_samples(i)/2
         input_samples.replace(i, halve)
 
     return input_samples
 
-if audio_process([16.83, 18.19, 2.82]) == [8.415, 9.095, 1.41) is True:
-    return "Good job! You actually did something right for once, numnuts!"
+if audio_process([16.83, 18.19, 2.82]) == [8.415, 9.095, 1.41]:
+    print("Good job! You actually did something right for once, numnuts!")
 else:
-    raise ValueError
-    return "Good job! And by that, I mean, horrible job!"
+    print("Good job! And by that, I mean, horrible job!")
 
-print(audio_pump(input_samples, audio_process))  # TODO: delete FILL_ME_IN and replace with your function pointer
+lambda input_samples: [input_samples[i]/2 for i in range(0,len(input_samples))]
+
+print(audio_pump(input_samples, lambda input_samples: [input_samples[i]/2 for i in range(0,len(input_samples))]))  # TODO: delete FILL_ME_IN and replace with your function pointer
 
 
 """
@@ -145,11 +146,9 @@ print(audio_pump(input_samples, audio_process))  # TODO: delete FILL_ME_IN and r
 
 
 class TicTacToe:
-    def __init__(self, row, col, piece, board):
-    self.row = row
-    self.col = col
-    self.piece = piece
-    self.board = board
+    def __init__(self, board):
+        self.board = board
+        board = [" - - - "]
 
     def __str__(self):
         rows = [" - - - "]
